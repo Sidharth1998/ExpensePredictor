@@ -8,7 +8,7 @@ from flask import make_response
 from forecast import *
 
 ## Reading the data and predicting the values
-df = pd.read_csv('BLS_Data.csv')
+df = pd.read_csv('https://github.com/Sidharth1998/ExpensePredictor/blob/main/BLS_Data.csv', sep=",")
 df = clean_data(df)
 forecast_values = forecasting(df)
 forecast_values['date'] = forecast_values['date'].apply(lambda x: pd.to_datetime(x).strftime("%b %Y"))
