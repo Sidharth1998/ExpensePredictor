@@ -1,0 +1,56 @@
+<html>
+   <head>
+       <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='catalog.css') }}">
+      <title>Daily Expense App</title>
+   </head>
+   <body>
+      <header>
+         <h1>Expense Predictor</h1>
+      </header>
+      <div class="middle">
+         <div class="items">
+            <hr>
+            <div class="editform">
+                <form action="{{url_for('groceryExpense')}}" method="POST">
+                    <table class="table">
+                        <thead class = "thead-dark">
+                          <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Quantity</th>
+                            {% for date in dates %}
+                            <th scope="col">{{ date }}</th>
+                            {% endfor %}
+                          </tr>
+                        </thead>
+                        <tbody>
+                    {% for item in items %}
+                    <tr>
+                    <td><p>{{ item }}</p></td>
+                    <td>
+                        <input type="number" size="30" name="{{ item }}" placeholder="Quantity" value="0">
+                </td>
+                {% for key, value in prices.iterrows() %}
+                {% for date in dates %}
+                {% if (value["item_name"] == item) and (value["date"] == date) %}
+                <td> {{ '%0.4f'|format(value.price|float) }} </td>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+            </tr>
+                {% endfor %}
+                    
+                
+            </tbody>
+        </table>
+                <input type="submit" style="width:25%;margin-left:37.5%;" class="btn btn-success btn-lg btn-block" value="Submit"><br>
+            </div>
+        </div>
+    </body>
+</html>
