@@ -15,7 +15,7 @@ forecast_values['date'] = forecast_values['date'].apply(lambda x: pd.to_datetime
 forecast_values['item_name'] = forecast_values.index
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/main')
 def index():
     items = list(set(df.index))
     dates = list(forecast_values['date'].unique()[-4:])
