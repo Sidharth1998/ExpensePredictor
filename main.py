@@ -53,3 +53,7 @@ def groceryExpense():
                 total_expense[date] += cost
     
     return render_template('expense.html', items=items, dates = dates, quantity = quantity, monthly_cost = final_amounts, total = total_expense)
+
+
+if __name__ == '__main__':
+    app.run()
